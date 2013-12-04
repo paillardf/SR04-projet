@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="fr.utc.sr04.projet.ui.MainController"
+	prefWidth="800" prefHeight="600">
+	<VBox id="gridPane" AnchorPane.topAnchor="0"
+		AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0"
+		AnchorPane.leftAnchor="0">
+
+		<GridPane GridPane.hgrow="ALWAYS" alignment="center" hgap="10"
+			vgap="10">
+			<!-- padding><Insets top="25" right="25" bottom="10" left="25"/></padding -->
+			<Text styleClass="title" text="Connected Peers:"
+				GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" />
+			<VBox fx:id="connectedPeerList" GridPane.columnIndex="0"
+				GridPane.rowIndex="1" GridPane.columnSpan="2" prefHeight="100" prefWidth="400">
+			</VBox>
+
+
+			<Text styleClass="title" text="Informations:"
+				GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2" />
+			<VBox fx:id="informationsList" GridPane.columnIndex="0"
+				GridPane.rowIndex="3" GridPane.columnSpan="2" prefHeight="300" prefWidth="400">
+			</VBox>
+
+
+		</GridPane>
+	</VBox>
+
+	<stylesheets>
+		<URL value="@../css/main.css" />
+	</stylesheets>
+</AnchorPane>

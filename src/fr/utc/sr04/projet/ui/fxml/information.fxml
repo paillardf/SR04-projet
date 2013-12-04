@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root type="fr.utc.sr04.projet.ui.InformationView" xmlns:fx="http://javafx.com/fxml"
+	GridPane.hgrow="ALWAYS" alignment="CENTER_LEFT" hgap="10" vgap="10">
+
+	<Label styleClass="label" text="value: " GridPane.rowIndex="0"
+		GridPane.columnIndex="0" />
+
+	<TextField fx:id="valueField" GridPane.rowIndex="0"
+		GridPane.columnIndex="1" GridPane.columnSpan="1" onAction="#handleTextEntered" />
+
+	<Label styleClass="label" text="date: " GridPane.rowIndex="0"
+		GridPane.columnIndex="2" />
+
+	<Label fx:id="dateLabel" GridPane.rowIndex="0"
+		GridPane.columnIndex="3" />
+
+	<Label styleClass="label" text="owner: " GridPane.rowIndex="0"
+		GridPane.columnIndex="4" />
+
+	<Label fx:id="ownerLabel" GridPane.rowIndex="0"
+		GridPane.columnIndex="5" />
+
+
+	<VBox fx:id="eventBox" prefHeight="100" GridPane.rowIndex="1" GridPane.columnIndex="0" 
+		GridPane.columnSpan="6">
+
+	</VBox>
+
+
+</fx:root>

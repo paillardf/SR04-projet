@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>projet SR04</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>jConnect_src</name>
+			<type>2</type>
+			<locationURI>jConnect_src</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>jConnect_src</name>
+			<value>$%7BPARENT-1-PROJECT_LOC%7D/jConnect/src</value>
+		</variable>
+	</variableList>
+</projectDescription>
