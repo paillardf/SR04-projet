@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import com.jconnect.JConnect;
 import com.jconnect.impl.peergroup.NetPeerGroup;
 
+import fr.utc.sr04.projet.data.DataBaseManager;
+import fr.utc.sr04.projet.service.EventSyncService;
 import fr.utc.sr04.projet.ui.MainController;
 
 public class App extends Application {
@@ -40,8 +42,11 @@ public class App extends Application {
 		peerGroup = (NetPeerGroup) jConnect.getPeerGroupManager()
 				.newGroupInstance(NetPeerGroup.class,
 						NetPeerGroup.NETPEERGROUP_UUID);
+		
+		
+		peerGroup.addService(new EventSyncService(peerGroup));
 		//
-		jConnect.getPeerGroupManager().startAllGroup();
+		
 		//
 		//
 		//
@@ -54,13 +59,16 @@ public class App extends Application {
 		Parent root = (Parent) fxmlLoader.load(location.openStream());
 		MainController currentController = (MainController) fxmlLoader
 				.getController();
+		currentController.setBDD(new DataBaseManager(prefFolder));
 		currentController.setPeerGroup(peerGroup);
+		
 		//
 		Scene scene = new Scene(root, 470, 600);
 		//
 		stage.setTitle("Projet SR04: "+prefFolder);
 		stage.setScene(scene);
 		stage.show();
+		jConnect.getPeerGroupManager().startAllGroup();
 
 	}
 

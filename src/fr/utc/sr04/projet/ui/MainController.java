@@ -18,8 +18,11 @@ import com.jconnect.core.event.PeerEventListener;
 import com.jconnect.core.peergroup.peer.PeerEvent;
 import com.jconnect.impl.peergroup.NetPeerGroup;
 
+import fr.utc.sr04.projet.data.DataBaseManager;
 import fr.utc.sr04.projet.model.Event;
 import fr.utc.sr04.projet.model.EventsStack;
+import fr.utc.sr04.projet.model.InfoID;
+import fr.utc.sr04.projet.service.EventSyncService;
 
 public class MainController implements Initializable, PeerEventListener {
 	@FXML
@@ -30,6 +33,8 @@ public class MainController implements Initializable, PeerEventListener {
 	private ObservableList<String> connectedPeer;
 	private ObservableList<EventsStack> informations;
 	private NetPeerGroup pg;
+	public DataBaseManager bdd;
+	private EventSyncService eventSyncService;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -65,12 +70,21 @@ public class MainController implements Initializable, PeerEventListener {
 	}
 
 	public void createNewEvent(EventsStack info, String text) {
-		Event e = new Event("test");
-		e.owner = "me";
+
+		Event e = null;
+		if (info.getEvents().size() > 0) {
+			e = new Event(info.getEvents().get(0).id);
+			e.index = info.getEvents().get(0).index;
+		} else {
+			e = new Event(InfoID.generate().toString());
+			e.index = 0;
+		}
+
+		e.owner = pg.getPeerID().toString();
 		e.time = System.currentTimeMillis();
 		e.value = text;
 		info.addEvent(e);
-
+		bdd.saveEvent(e);
 		if (info.getEvents().size() == 1) {
 			informations.add(new EventsStack());
 		} else {
@@ -83,8 +97,39 @@ public class MainController implements Initializable, PeerEventListener {
 
 	public void setPeerGroup(NetPeerGroup peerGroup) {
 		this.pg = peerGroup;
+		eventSyncService = (EventSyncService) peerGroup.getService(EventSyncService.class);
+		eventSyncService.setController(this);
 		peerGroup.registerPeerEventListener(this);
 
+	}
+
+	public void setBDD(DataBaseManager bdd) {
+		this.bdd = bdd;
+	}
+
+	public void onNewEvent(final Event e) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				for (int i =0; i< informations.size(); i++) {
+					EventsStack info = informations.get(i);
+					if (info.getEvents().size() > 0) {
+						if (info.getEvents().get(0).id.equals(e.id)) {
+							info.addEvent(e);
+							int index = informations.indexOf(info);
+							informations.remove(index);
+							informations.add(index, info);
+							return;
+						}
+					}else{
+						info.addEvent(e);
+						informations.add(new EventsStack());
+						
+						return;
+					}
+				}
+			}
+		});
 	}
 
 	@Override

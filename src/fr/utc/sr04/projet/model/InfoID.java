@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import com.jconnect.util.uuid.AbstractUUID;
 
-public class ConversationID extends AbstractUUID {
+public class InfoID extends AbstractUUID {
 	
 private static final String prefix="info";
 	
@@ -14,18 +14,18 @@ private static final String prefix="info";
 		return prefix;
 	}
 
-	public static ConversationID generate(){
+	public static InfoID generate(){
 		
-		return new ConversationID(AbstractUUID.generateUUID());
+		return new InfoID(AbstractUUID.generateUUID());
 	}
 
-	public ConversationID(UUID uuid)
+	public InfoID(UUID uuid)
 	{
 		super(uuid);
 	}
 	
 	
-	public ConversationID(String uuid)
+	public InfoID(String uuid)
 	{
 		super(uuid);
 		if(!getPrefix().equals(prefix))
