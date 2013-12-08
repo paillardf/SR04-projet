@@ -175,4 +175,23 @@ public class DataBaseManager extends DbliteConnection {
 
 	}
 
+	public boolean isInConflict(Event e) {
+		String sqlQuery = "select count( "+UUIDFIELD+ ") as count from " + DBEVENTSTABLE
+				 + " where "+NUMERICFIELD+"="+e.index + " and "+UUIDFIELD+"=\""+e.id+"\"";
+
+		ResultSet rs;
+		try {
+			rs = query(sqlQuery);
+
+			while (rs.next()) {
+				if(rs.getInt("count")>1){
+					return true;
+				}
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return false;
+	}
+
 }

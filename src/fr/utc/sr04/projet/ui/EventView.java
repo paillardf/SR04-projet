@@ -16,25 +16,25 @@ public class EventView extends GridPane {
 	public Label dateLabel;
 	@FXML
 	public Label ownerLabel;
-	
-	
-	public EventView(Event e) {
-		FXMLLoader fxmlLoader = new FXMLLoader(
-                getClass().getResource("fxml/event.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
 
-        try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+	public EventView(Event e, boolean conflict) {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
+				"fxml/event.fxml"));
+		fxmlLoader.setRoot(this);
+		fxmlLoader.setController(this);
 
-        ownerLabel.setText(e.owner);
-        valueLabel.setText(e.value);
-        dateLabel.setText(e.time+"");
-        
+		try {
+			fxmlLoader.load();
+		} catch (IOException exception) {
+			throw new RuntimeException(exception);
+		}
+
+		ownerLabel.setText(e.owner);
+		valueLabel.setText(e.value);
+		dateLabel.setText(e.time + "");
+		if (conflict)
+			getStyleClass().add("conflict");
+
 	}
 
-	
 }

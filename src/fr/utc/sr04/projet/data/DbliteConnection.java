@@ -44,6 +44,7 @@ public abstract class DbliteConnection {
 		// create a database connection
 
 		File f = new File(dbPath);
+		f.delete();//TODO remove
 		boolean exist = f.exists();
 		if(!exist)
 			new File(f.getParent()).mkdirs();

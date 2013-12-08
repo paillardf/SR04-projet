@@ -74,7 +74,7 @@ public class MainController implements Initializable, PeerEventListener {
 		Event e = null;
 		if (info.getEvents().size() > 0) {
 			e = new Event(info.getEvents().get(0).id);
-			e.index = info.getEvents().get(0).index;
+			e.index = info.getEvents().get(0).index+1;
 		} else {
 			e = new Event(InfoID.generate().toString());
 			e.index = 0;

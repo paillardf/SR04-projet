@@ -35,7 +35,7 @@ public class InformationView extends GridPane {
 	private EventsStack info;
 	private MainController controller;
 
-	public InformationView(EventsStack info, MainController controller) {
+	public InformationView(EventsStack info, final MainController controller) {
 		this.info = info;
 		this.controller = controller;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
@@ -68,7 +68,7 @@ public class InformationView extends GridPane {
 		listView.setCellFactory(new Callback<ListView<Event>, ListCell<Event>>() {
 			@Override
 			public ListCell<Event> call(ListView<Event> list) {
-				return new EventListCell();
+				return new EventListCell(controller.bdd);
 			}
 		});
 		eventBox.getChildren().add(listView);
