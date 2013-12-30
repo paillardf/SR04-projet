@@ -40,7 +40,6 @@ public class MainController implements Initializable, PeerEventListener {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		iniConnectedPeerList();
 		iniInformationList();
-		populate();
 	}
 
 	private void iniInformationList() {
@@ -66,7 +65,13 @@ public class MainController implements Initializable, PeerEventListener {
 	}
 
 	public void populate() {
+		
+		
 		informations.add(new EventsStack());
+		EventsStack events = bdd.loadEventsStack("*", -1, "*");
+		for (int i = events.getEvents().size()-1; i>=0; i--) {
+			onNewEvent(events.getEvents().get(i));
+		}
 	}
 
 	public void createNewEvent(EventsStack info, String text) {

@@ -61,6 +61,7 @@ public class App extends Application {
 				.getController();
 		currentController.setBDD(new DataBaseManager(prefFolder));
 		currentController.setPeerGroup(peerGroup);
+		currentController.populate();
 		
 		//
 		Scene scene = new Scene(root, 470, 600);
