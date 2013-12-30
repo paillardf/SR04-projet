@@ -6,7 +6,7 @@ import com.jconnect.util.uuid.AbstractUUID;
 
 public class InfoID extends AbstractUUID {
 	
-private static final String prefix="info";
+public static final String prefix="info";
 	
 
 	@Override

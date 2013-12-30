@@ -16,6 +16,7 @@ public abstract class DbliteConnection {
 	
 	private static final String FIELD_VERSION = "VERSION";
 	private Connection m_connection;
+	private String path;
 
 	protected abstract void onCreate() throws SQLException;
 	protected abstract void onUpdate() throws SQLException;
@@ -48,6 +49,8 @@ public abstract class DbliteConnection {
 		boolean exist = f.exists();
 		if(!exist)
 			new File(f.getParent()).mkdirs();
+		
+		path = f.getParent();
 		
 //		Properties properties = new Properties();
 //		properties.setProperty("PRAGMA foreign_keys", "ON");
@@ -111,7 +114,9 @@ public abstract class DbliteConnection {
 		}
 
 	}
-
+	public String getPath() {
+		return path;
+	}
 
 
 }

@@ -23,6 +23,8 @@ import fr.utc.sr04.projet.model.Event;
 import fr.utc.sr04.projet.model.EventsStack;
 import fr.utc.sr04.projet.model.InfoID;
 import fr.utc.sr04.projet.service.EventSyncService;
+import fr.utc.sr04.projet.service.FileSyncService;
+import fr.utc.sr04.projet.service.ScanService;
 
 public class MainController implements Initializable, PeerEventListener {
 	@FXML
@@ -31,7 +33,7 @@ public class MainController implements Initializable, PeerEventListener {
 	public VBox informationsList;
 
 	private ObservableList<String> connectedPeer;
-	private ObservableList<EventsStack> informations;
+	public ObservableList<EventsStack> informations;
 	private NetPeerGroup pg;
 	public DataBaseManager bdd;
 	private EventSyncService eventSyncService;
@@ -104,6 +106,10 @@ public class MainController implements Initializable, PeerEventListener {
 		this.pg = peerGroup;
 		eventSyncService = (EventSyncService) peerGroup.getService(EventSyncService.class);
 		eventSyncService.setController(this);
+		FileSyncService fileSyncService = (FileSyncService) peerGroup.getService(FileSyncService.class);
+		fileSyncService.setController(this);
+		ScanService sScanService = (ScanService) peerGroup.getService(ScanService.class);
+		sScanService.setController(this);
 		peerGroup.registerPeerEventListener(this);
 
 	}
@@ -159,5 +165,10 @@ public class MainController implements Initializable, PeerEventListener {
 			}
 		});
 
+	}
+
+	public void getPrefPath() {
+		
+		
 	}
 }
