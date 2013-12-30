@@ -2,3 +2,6 @@ bin/
 gen/
 jconnect/
 conf.ini
+client1/*
+client2/*
+dblite.db
