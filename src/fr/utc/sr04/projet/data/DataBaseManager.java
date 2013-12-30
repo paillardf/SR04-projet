@@ -73,12 +73,13 @@ public class DataBaseManager extends DbliteConnection {
 	public Event getLastEventOfAFile(String infoID) {
 		Event res = null;
 		try {
-			ResultSet rs = query("select e." + DATEFIELD + ", e." + OWNERFIELD
+			String sql = "select e." + DATEFIELD + ", e." + OWNERFIELD
 					+ ",e." + NUMERICFIELD + ",e." + VALUEFIELD + " from "
 					+ DBEVENTSTABLE + " e" + " where " + UUIDFIELD + "=\""
 					+ infoID + "\"" + " and " + DATEFIELD + " = (select max("
 					+ DATEFIELD + ") from " + DBEVENTSTABLE + " where "
-					+ UUIDFIELD + "=\"" + infoID + "\"");
+					+ UUIDFIELD + "=\"" + infoID + "\")";
+			ResultSet rs = query(sql);
 			while (rs.next()) {
 				res = new Event(infoID);
 				res.owner = rs.getString(OWNERFIELD);
@@ -97,11 +98,12 @@ public class DataBaseManager extends DbliteConnection {
 
 	public void saveEvent(Event e) {
 		try {
-			update("Insert into " + DBEVENTSTABLE + " (" + NUMERICFIELD + ","
+			String sql = "Insert into " + DBEVENTSTABLE + " (" + NUMERICFIELD + ","
 					+ OWNERFIELD + "," + DATEFIELD + "," + VALUEFIELD + ","
 					+ UUIDFIELD + ") " + "VALUES(\"" + e.index + "\",\""
 					+ e.owner + "\",\"" + e.time + "\",\"" + e.value + "\",\""
-					+ e.id + "\")");
+					+ e.id + "\" )";
+			update(sql);
 		} catch (SQLException ex) {
 			System.err.println(ex.getMessage());
 		}

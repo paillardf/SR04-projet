@@ -13,7 +13,10 @@ import com.jconnect.JConnect;
 import com.jconnect.impl.peergroup.NetPeerGroup;
 
 import fr.utc.sr04.projet.data.DataBaseManager;
+import fr.utc.sr04.projet.message.AskFileContentMessage;
 import fr.utc.sr04.projet.service.EventSyncService;
+import fr.utc.sr04.projet.service.FileSyncService;
+import fr.utc.sr04.projet.service.ScanService;
 import fr.utc.sr04.projet.ui.MainController;
 
 public class App extends Application {
@@ -45,6 +48,8 @@ public class App extends Application {
 		
 		
 		peerGroup.addService(new EventSyncService(peerGroup));
+		peerGroup.addService(new FileSyncService(peerGroup));
+		peerGroup.addService(new ScanService(peerGroup));
 		//
 		
 		//

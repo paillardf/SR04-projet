@@ -25,7 +25,6 @@ public class EventSyncService extends Service {
 
 	@Override
 	protected void onHandleMessageEvent(MessageEvent m) {
-		System.out.println(m.getMessage().getID());
 		if (m.getMessage().getContent() instanceof EventContentMessage) {
 			EventContentMessage content = (EventContentMessage) m.getMessage()
 					.getContent();
