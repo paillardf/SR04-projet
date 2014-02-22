@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
-import sun.util.logging.resources.logging;
-
 import com.jconnect.core.event.MessageEvent;
 import com.jconnect.core.message.Message;
 import com.jconnect.core.peergroup.AbstractPeerGroup;
@@ -41,7 +39,7 @@ public class ScanService extends Service {
 
 	@Override
 	protected void onUpdade() {
-		block(10000);
+		block(5000);
 
 		File folder = new File(controller.bdd.getPath());
 		FilenameFilter filter = new FilenameFilter() {

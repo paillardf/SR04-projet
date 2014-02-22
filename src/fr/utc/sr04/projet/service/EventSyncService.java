@@ -28,7 +28,7 @@ public class EventSyncService extends Service {
 		if (m.getMessage().getContent() instanceof EventContentMessage) {
 			EventContentMessage content = (EventContentMessage) m.getMessage()
 					.getContent();
-			for (int i = 0; i < content.getEvents().size(); i++) {
+			for (int i =  content.getEvents().size()-1; i >=0; i--) {
 				controller.bdd.saveEvent(content.getEvents().get(i));
 				controller.onNewEvent(content.getEvents().get(i));
 				
@@ -73,7 +73,7 @@ public class EventSyncService extends Service {
 
 	@Override
 	protected void onUpdade() {
-		block(10000);
+		block(5000);
 
 		EventVersionContentMessage content = new EventVersionContentMessage();
 		List<EventVersion> eVersion = controller.bdd.getLastEventsOffOwners();
